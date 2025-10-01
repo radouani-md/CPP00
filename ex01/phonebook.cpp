@@ -36,9 +36,14 @@ void	PhoneBook::setPhoneNumber(std::string pNum)
 {
 	phoneNum = pNum;
 }
+void	PhoneBook::setIndex(int ind)
+{
+	index = ind;
+}
 
 std::string PhoneBook::getFirstName() { return (firstName); }
 std::string PhoneBook::getLastName() { return (lastName); }
 std::string PhoneBook::getNickName() { return (nickName); }
 std::string PhoneBook::gettDarkSecret() { return (darkSecret); }
 std::string PhoneBook::getPhoneNumber() { return (phoneNum); }
+int			PhoneBook::getIndex() { return (index); }
