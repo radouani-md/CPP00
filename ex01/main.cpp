@@ -15,7 +15,7 @@
 int main()
 {
 	std::string line;
-	PhoneBook contacts[3];
+	PhoneBook contacts[3]; // To 8
 	int count = 0;
 
 	while (getline(std::cin, line))
