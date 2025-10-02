@@ -45,21 +45,7 @@ class PhoneBook
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void	displayData(PhoneBook *contacts, int size);
+void	addNewContact(PhoneBook *contact);
 
 #endif
