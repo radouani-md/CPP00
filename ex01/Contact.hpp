@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 10:51:18 by mradouan          #+#    #+#             */
-/*   Updated: 2025/09/29 14:03:51 by mradouan         ###   ########.fr       */
+/*   Created: 2025/10/03 11:19:57 by mradouan          #+#    #+#             */
+/*   Updated: 2025/10/03 18:06:19 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+// #pragma once
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+// #include "PhoneBook.hpp"
 
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-#include <ctype.h>
-
-class PhoneBook
+class Contact
 {
 	private :
 		std::string firstName;
@@ -35,7 +32,6 @@ class PhoneBook
 		void setPhoneNumber(std::string pNum);
 		void setIndex(int ind);
 
-	
 		std::string getFirstName();
 		std::string getLastName();
 		std::string getNickName();
@@ -45,7 +41,12 @@ class PhoneBook
 
 };
 
-void	displayData(PhoneBook *contacts, int size);
-void	addNewContact(PhoneBook *contact);
+
+
+
+
+
+
+
 
 #endif

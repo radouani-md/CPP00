@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 11:42:48 by mradouan          #+#    #+#             */
-/*   Updated: 2025/10/03 15:56:36 by mradouan         ###   ########.fr       */
+/*   Created: 2025/09/22 10:51:18 by mradouan          #+#    #+#             */
+/*   Updated: 2025/10/03 18:14:06 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
-int main()
+# include <iostream>
+# include "Contact.hpp"
+# include <string>
+# include <sstream>
+# include <iomanip>
+# include <cstdlib>
+# include <ctype.h>
+
+# define SIZE 3
+
+class PhoneBook
 {
-	PhoneBook contacts;
-	std::string line;
-
-	int count = 0;
-	while (getline(std::cin, line))
-	{
-		if (line == "ADD")
-		{
-			contacts.addNewContact();
-			count++;
-		}
-		else if (line == "SEARCH")
-		{
-			contacts.displayData();
-		}
-		else if (line == "EXIT")
-			break ;
-	}
+	private :
+		Contact	contacts[SIZE];
+		int	len_contact;
 	
-}
+	public :
+		void	displayData();
+		void	addNewContact();
+};
+
+
+
+#endif

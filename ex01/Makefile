@@ -4,7 +4,7 @@ CFLAGS = -Wextra -Wall -Werror -std=c++98 -fsanitize=address -g3
 
 CC = c++
 
-SRC = phonebook.cpp addUser.cpp displayData.cpp main.cpp
+SRC = phonebook.cpp Contact.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -13,7 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.cpp phonebook.hpp
+%.o: %.cpp PhoneBook.hpp Contact.hpp 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
