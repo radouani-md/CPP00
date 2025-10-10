@@ -159,20 +159,22 @@ void	getValues(Contact contacts)
 void PhoneBook::displayData()
 {
 	std::string line;
-    std::string inde;
+	bool		isFound = false;
+	std::string	str;
 
 	std::cout << "|  Index   |First name|Last name |Nick name |" << std::endl;
 	for (int i = 0; i < len_contact; i++)
 		getValues(contacts[i]);
-
+	
 	std::cout << "Enter the index :";
 	getline(std::cin, line);
 
 	for (int i = 0; i < len_contact; i++)
 	{
-        inde = contacts[i].getIndex() + '0';
-		if (inde == line)
+        str = contacts[i].getIndex() + '0';
+		if (str == line)
 		{
+			isFound = true;
 			std::cout << "Your first name is " << contacts[i].getFirstName() << std::endl;
 			std::cout << "Your Last name is  " << contacts[i].getLastName() << std::endl;
 			std::cout << "Your nick name is " << contacts[i].getNickName() << std::endl;
@@ -180,7 +182,7 @@ void PhoneBook::displayData()
 			std::cout << "Your Dark Secret is " << contacts[i].gettDarkSecret() << std::endl;
             break ;
 		}
-		else
-			{std::cout << "We dont have this index " << std::endl; break ;}
 	}
+	if (isFound == false)
+		std::cout << "We dont have this index " << std::endl;
 }
