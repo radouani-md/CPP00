@@ -6,32 +6,34 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:19:33 by mradouan          #+#    #+#             */
-/*   Updated: 2025/10/03 18:20:32 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/10/11 16:03:07 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-std::string	checkLineNames(std::string *line)
+bool	checkLineNames(std::string *line)
 {
-	getline(std::cin, (*line));
+	if (!getline(std::cin, (*line)))
+		return (false);
 	for (size_t j = 0; j < (line)->length(); j++)
 	{
 		if (!isprint((*line)[j]))
 			return ("");
 	}
-	return ((*line));
+	return (true);
 }
 
-std::string	checkLineNum(std::string *line)
+bool	checkLineNum(std::string *line)
 {
-	getline(std::cin, (*line));
+	if (!getline(std::cin, (*line)))
+		return (false);
 	for (size_t j = 0; j < (line)->length(); j++)
 	{
 		if (!isprint((*line)[j]) || isalpha((*line)[j]))
 			return (std::cout << "Error ! Invalid input" << std::endl, "");
 	}
-	return ((*line));
+	return (true);
 }
 
 void	PhoneBook::addNewContact()
@@ -44,44 +46,49 @@ void	PhoneBook::addNewContact()
 	{
         if (len_contact >= SIZE - 1)
             len_contact = SIZE - 1;
+
 		std::cout << "Enter your first name: ";
-		line = checkLineNames(&line);
+		if (checkLineNames(&line) == false)
+			return ;
 		if (line.empty())
 			continue ;
 		contact->setFirstName(line);
+	
 		std::cout << "Enter your Last name: ";
-		line = checkLineNames(&line);
+		if (checkLineNames(&line) == false)
+			return ;
 		if (line.empty())
 			continue ;
 		contact->setLastName(line);
 
 		std::cout << "Enter your nick name: ";
-		line = checkLineNames(&line);
+		if (checkLineNames(&line) == false)
+			return ;
 		if (line.empty())
 			continue ;
 		contact->setNickName(line);
 
 		std::cout << "Enter your phone number: ";
-		line = checkLineNum(&line);
+		if (checkLineNum(&line) == false)
+			return ;
 		if (line.empty())
 			continue ;
 		contact->setPhoneNumber(line);
 
 		std::cout << "Enter your Dark Secret: ";
-		line = checkLineNames(&line);
+		if (checkLineNames(&line) == false)
+			return ;
 		if (line.empty())
 			continue ;
 		contact->setDarkSecret(line);
+	
 		contact->setIndex(index);
 		index++;
         len_contact++;
 		break ;
 	}
 }
-/*
-    /////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-*/
+
 std::string	toTenCaracters(std::string value)
 {
 	std::string updatedValue;
@@ -113,41 +120,26 @@ void	getValues(Contact contacts)
 
 	std::string *val = printedVar[contacts.getIndex() % SIZE];
 	val[0].push_back('|');
-   
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (i == 0)
-			val[0].push_back(contacts.getIndex() + '0');
-		else
-			val[0].push_back(' ');
-	}
-	val[1].push_back('|'); 
-    for (size_t i = 0; i < 10; i++)
-	{
-        char safeCh = (i < getFirst.length()) ? getFirst[i] : ' ';
-		if (isalpha(safeCh) || isprint(safeCh))
-			val[1].push_back(safeCh);
-		else
-			val[1].push_back(' ');
-	}
+	val[0].insert(1, 9, ' ');
+	val[0].push_back(contacts.getIndex() + '0');
+	val[0].push_back('|');
+	
+    int len = getFirst.length();
+	if (len < 10)
+		val[1].insert(0, 10 - len, ' ');
+	val[1].append(getFirst);
+	val[1].push_back('|');
+
+	int len1 = getLast.length();
+	if (len1 < 10)
+		val[2].insert(0, 10 - len1, ' ');
+	val[2].append(getLast);
 	val[2].push_back('|');
-	for (size_t i = 0; i < 10; i++)
-	{
-        char safeCh = (i < getLast.length()) ? getLast[i] : ' ';
-		if (isalpha(safeCh) || isprint(safeCh))
-			val[2].push_back(safeCh);
-		else
-			val[2].push_back(' ');
-	}
-	val[3].push_back('|');
-	for (size_t i = 0; i < 10; i++)
-	{
-        char safeCh = (i < getNick.length()) ? getNick[i] : ' ';
-		if (isalpha(safeCh) || isprint(safeCh))
-			val[3].push_back(safeCh);
-		else
-			val[3].push_back(' ');
-	}
+	
+	int len2 = getNick.length();
+	if (len2 < 10)
+		val[3].insert(0, 10 - len2, ' ');
+	val[3].append(getNick);
 	val[3].push_back('|');
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -162,13 +154,13 @@ void PhoneBook::displayData()
 	bool		isFound = false;
 	std::string	str;
 
-	std::cout << "|  Index   |First name|Last name |Nick name |" << std::endl;
+	std::cout << "|     Index|First name| Last name| Nick name|" << std::endl;
 	for (int i = 0; i < len_contact; i++)
 		getValues(contacts[i]);
 	
 	std::cout << "Enter the index :";
-	getline(std::cin, line);
-
+	if (!getline(std::cin, line))
+		return ;
 	for (int i = 0; i < len_contact; i++)
 	{
         str = contacts[i].getIndex() + '0';
