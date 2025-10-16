@@ -1,4 +1,4 @@
-NAME = test
+NAME = phonebook
 
 CFLAGS = -Wextra -Wall -Werror -std=c++98 -fsanitize=address -g3
 

@@ -6,7 +6,7 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:19:33 by mradouan          #+#    #+#             */
-/*   Updated: 2025/10/11 16:03:07 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:02:34 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	checkLineNum(std::string *line)
 	for (size_t j = 0; j < (line)->length(); j++)
 	{
 		if (!isprint((*line)[j]) || isalpha((*line)[j]))
-			return (std::cout << "Error ! Invalid input" << std::endl, "");
+			return (std::cout << "Error ! Invalid input" << std::endl, line->clear(), true);
 	}
 	return (true);
 }
