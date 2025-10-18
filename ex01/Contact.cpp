@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Contact.cpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 11:19:33 by mradouan          #+#    #+#             */
-/*   Updated: 2025/10/16 15:02:34 by mradouan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "PhoneBook.hpp"
 
 bool	checkLineNames(std::string *line)
@@ -19,7 +7,7 @@ bool	checkLineNames(std::string *line)
 	for (size_t j = 0; j < (line)->length(); j++)
 	{
 		if (!isprint((*line)[j]))
-			return ("");
+			return (line->clear(), true);
 	}
 	return (true);
 }
@@ -102,12 +90,21 @@ std::string	toTenCaracters(std::string value)
 	return (value);
 }
 
+void	fillVar(std::string *val, std::string getMember)
+{
+	int len = getMember.length();
+	if (len < 10)
+		(*val).insert(0, 10 - len, ' ');
+	(*val).append(getMember);
+	(*val).push_back('|');
+}
+
 void	getValues(Contact contacts)
 {
 	std::string getFirst;
 	std::string getLast;
 	std::string getNick;
-	std::string	printedVar[SIZE][3];
+	std::string	printedVar[SIZE][4];
 
 	getFirst = contacts.getFirstName();
 	getFirst = toTenCaracters(getFirst);
@@ -124,27 +121,11 @@ void	getValues(Contact contacts)
 	val[0].push_back(contacts.getIndex() + '0');
 	val[0].push_back('|');
 	
-    int len = getFirst.length();
-	if (len < 10)
-		val[1].insert(0, 10 - len, ' ');
-	val[1].append(getFirst);
-	val[1].push_back('|');
-
-	int len1 = getLast.length();
-	if (len1 < 10)
-		val[2].insert(0, 10 - len1, ' ');
-	val[2].append(getLast);
-	val[2].push_back('|');
+	fillVar(&val[1], getFirst);
+	fillVar(&val[2], getLast);
+	fillVar(&val[3], getNick);
 	
-	int len2 = getNick.length();
-	if (len2 < 10)
-		val[3].insert(0, 10 - len2, ' ');
-	val[3].append(getNick);
-	val[3].push_back('|');
-	for (size_t i = 0; i < 4; i++)
-	{
-		std::cout << val[i];
-	}
+	for (size_t i = 0; i < 4; i++){ std::cout << val[i]; }
 	std::cout << std::endl;
 }
 
@@ -160,7 +141,10 @@ void PhoneBook::displayData()
 	
 	std::cout << "Enter the index :";
 	if (!getline(std::cin, line))
+	{
+		std::cout << std::endl;
 		return ;
+	}
 	for (int i = 0; i < len_contact; i++)
 	{
         str = contacts[i].getIndex() + '0';

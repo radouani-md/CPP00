@@ -1,10 +1,10 @@
 NAME = phonebook
 
-CFLAGS = -Wextra -Wall -Werror -std=c++98 -fsanitize=address -g3
+CFLAGS = -Wextra -Wall -Werror -std=c++98
 
 CC = c++
 
-SRC = phonebook.cpp Contact.cpp main.cpp
+SRC = PhoneBook.cpp Contact.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -15,6 +15,7 @@ $(NAME): $(OBJ)
 
 %.o: %.cpp PhoneBook.hpp Contact.hpp 
 	$(CC) $(CFLAGS) -c $< -o $@
+
 
 clean:
 	rm -f $(OBJ)

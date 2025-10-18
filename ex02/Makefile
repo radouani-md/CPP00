@@ -1,6 +1,6 @@
 NAME = Account
 
-CFLAGS = -Wextra -Wall -Werror -std=c++98 -fsanitize=address -g3
+CFLAGS = -Wextra -Wall -Werror -std=c++98
 
 CC = c++
 
@@ -15,6 +15,7 @@ $(NAME): $(OBJ)
 
 %.o: %.cpp Account.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
+
 
 clean:
 	rm -f $(OBJ)

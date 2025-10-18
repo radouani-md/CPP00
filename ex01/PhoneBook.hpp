@@ -1,27 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 10:51:18 by mradouan          #+#    #+#             */
-/*   Updated: 2025/10/16 14:57:04 by mradouan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
 # include <iostream>
 # include "Contact.hpp"
-# include <string>
-# include <sstream>
-# include <iomanip>
-# include <cstdlib>
-# include <ctype.h>
 
-# define SIZE 3
+# define SIZE 8
 
 class PhoneBook
 {
@@ -32,6 +15,7 @@ class PhoneBook
 	public :
 		void	displayData();
 		void	addNewContact();
+		void	initialize_len();
 };
 
 
